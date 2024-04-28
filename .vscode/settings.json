@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "simplefilesystem.h": "c",
+        "cstdint": "cpp"
+    },
+    "C_Cpp.clang_format_style": "{BasedOnStyle: Google, IndentWidth: 4}",
+    "editor.formatOnSave": true,
+    "[cpp]": {
+        "editor.tabSize": 4,
+    },
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+}

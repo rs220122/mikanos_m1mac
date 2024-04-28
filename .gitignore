@@ -1,0 +1,6 @@
+kernel.elf
+hankaku.bin
+*.o
+.*.d
+Loader.inf 
+disk.img

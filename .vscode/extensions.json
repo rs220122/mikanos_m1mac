@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "oderwat.indent-rainbow",
+        "usernamehw.errorlens",
+        "github.vscode-pull-request-github",
+        "shd101wyy.markdown-preview-enhanced",
+        "mechatroner.rainbow-csv",
+        "mosapride.zenkaku",
+        "mhutchie.git-graph",
+        "zhuangtongfa.material-theme",
+        "pkief.material-icon-theme",
+        "bierner.markdown-mermaid",
+    ],
+}
