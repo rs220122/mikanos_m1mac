@@ -1,0 +1,64 @@
+# macbook with mikan OS
+https://qiita.com/yamoridon/items/4905765cc6e4f320c9b5#qemu-で実行
+
+# ソースコードのビルド
+```
+cd edk2 
+ln -s ../my_workspace/day02b/MikanLoaderPkg ./ # これは、実行したいdayのパッケージをリンクする
+source edksetup.sh # Conf/target.txtファイルが生成される
+
+# 生成されたtarget.txtでMikanLoaderPkgをビルド対象として指定する必要がある。
+# ActivePlatform: MikanLoaderPkg/MikanLoderPkg.dsc 
+# TARGET: DEBUG 
+# TARGET_ARCH: X64 
+# TOOL_CHAIN_TAG: CLANGPDB 注意) macbookの場合実際のものとは異なる
+# build する
+build
+
+# Buildディレクトリ内に、MikanLoaderPkg/DEBUG_CLANGPDB/X64/Loader.efi ができる。
+# これをqemuで指定して起動する。
+```
+
+# qemuを起動する方法
+```
+$HOME/Documents/osbook/devenv/run_qemu.sh <efi_file>
+
+# 一般には以下。
+$HOME/Documents/osbook/devenv/run_qemu.sh Build/MikanLoaderX64/DEBUG_CLANGPDB/X64/Loader.efi
+$HOME/Documents/osbook/devenv/run_qemu.sh Build/MikanLoaderX64/DEBUG_CLANGPDB/X64/Loader.efi $HOME/Documents/osbook/my_workspace/day03c/kernel/kernel.elf
+```
+# ディスクをマウントする場合
+hdiutil attach -imagekey diskimage-class=CRawDiskImage -nomount disk.img
+
+sudo mount -t msdos disk.img mnt
+
+# 実行可能ファイルについて
+PE/COFFを使って、機械語の実行可能ファイルを作る。
+ELF形式にしておくことにより、リンク可能かつ実行可能なファイルを作ることができる。
+
+今回は、UEFI BIOS上で動くアプリケーションをEDK2(EFI Development Kit)で作る。
+EDK2では、BIOS上で動くアプリだけでなく、UEFI BIOSも作ることができる。
+
+# チェックアウト方法
+```
+# 該当のディレクトリまで移動する
+cd workspace/mikanos
+# ここでチェックアウトする
+git checkout osbook_day03a
+```
+
+
+
+
+# 参考: https://qiita.com/yamoridon/items/4905765cc6e4f320c9b5
+
+# 該当のMikanLoaderPkgをリンクさせる
+edk2# ln -s MikanLoaderPkg ./
+
+# buildする
+build 
+
+# QEMUを実行する。
+ ../devenv/run_qemu.sh <作られたEFIファイル>
+ 普通はここにできる。
+ Build/MikanLoaderX64/DEBUG_CLANGPDB/X64/Loader.efi

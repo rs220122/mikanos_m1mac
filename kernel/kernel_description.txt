@@ -1,0 +1,20 @@
+// コンパイルとリンクする
+// コンパイルして、機械後命令を含んだファイルを生成する。
+// -ffreestanding: フリースタンディング環境向けにコンパイルを行う。
+// 実行環境には、ホスト環境とフリースタンディング環境の2つがある。フリースタンディングは、OSがない環境のことを表す。
+// -fno-exceptions, -fno-rttiは、OSからのサポートが必要なC++の言語機能を無効にするもの
+// clang++ -O2 -Wall -g --target=x86_64-elf -ffreestanding -mno-red-zone -fno-exceptions -fno-rtti -std=c++17 -c main.cpp
+
+// こちらが正式版
+// clang++ ${=CPPFLAGS} -O2 --target=x86_64-elf -fno-exceptions -ffreestanding -c main.cpp
+
+
+// リンカによって、オブジェクトファイルから実行可能ファイルを作る。
+// オブジェクトは、他のオブジェクトファイルとの結合ない中間形式であり、単体で実行できない。
+// --image-base 0x100000 出力されたバイナリのベースアドレスを0x100000に設定する。
+// ld.lld --entry KernelMain -z norelro --image-base 0x100000 --static -o kernel.elf main.o
+// ld.lld $LDFLAGS --entry=KernelMain -z norelro --image-base 0x100000 --static -o kernel.elf -z separate-code main.o
+
+
+// インラインアセンブラ　C言語にアセンブリ言語の命令を埋め込むときに使用する
+// hlt命令はCPUを停止させる命令でこれを実行する、CPUが省電力な状態になる。
