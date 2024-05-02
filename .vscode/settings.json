@@ -3,7 +3,7 @@
         "simplefilesystem.h": "c",
         "cstdint": "cpp"
     },
-    "C_Cpp.clang_format_style": "{BasedOnStyle: Google, IndentWidth: 4}",
+    "C_Cpp.clang_format_style": "{BasedOnStyle: Google, IndentWidth: 4, NamespaceIndentation: All}",
     "editor.formatOnSave": true,
     "[cpp]": {
         "editor.tabSize": 4,
